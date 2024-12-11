@@ -2,9 +2,6 @@ import json
 import os
 from dataclasses import dataclass
 
-from einops import rearrange
-from PIL import ExifTags, Image
-
 import torch
 from huggingface_hub import hf_hub_download
 from safetensors.torch import load_file as load_sft
@@ -32,7 +29,7 @@ configs = {
         repo_id="black-forest-labs/FLUX.1-dev",
         repo_flow="flux1-dev.safetensors",
         repo_ae="ae.safetensors",
-        ckpt_path=os.getenv("FLUX_DEV", 'models/flux1-dev.safetensors'),
+        ckpt_path=os.getenv("FLUX_DEV"),
         lora_path=None,
         params=FluxParams(
             in_channels=64,
@@ -49,7 +46,7 @@ configs = {
             qkv_bias=True,
             guidance_embed=True,
         ),
-        ae_path=os.getenv("AE", 'models/ae.safetensors'),
+        ae_path=os.getenv("AE"),
         ae_params=AutoEncoderParams(
             resolution=256,
             in_channels=3,
@@ -287,7 +284,7 @@ def load_flow_model(name: str, device: str = "cuda", hf_download: bool = True, v
     lora_path = configs[name].lora_path
 
     if (
-        not os.path.exists(ckpt_path)
+        ckpt_path is None
         and configs[name].repo_id is not None
         and configs[name].repo_flow is not None
         and hf_download

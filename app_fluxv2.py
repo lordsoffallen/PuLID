@@ -12,9 +12,10 @@ from flux.util import (
     load_clip,
     load_flow_model,
     load_t5,
+    configs,
 )
 from pulid.pipeline_flux import PuLIDPipeline
-from pulid.utils import configs, resize_numpy_image_long
+from pulid.utils import resize_numpy_image_long
 
 
 @dataclass
