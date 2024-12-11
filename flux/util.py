@@ -356,7 +356,7 @@ def load_clip(device: str = "cuda") -> HFEmbedder:
 def load_ae(name: str, device: str = "cuda", hf_download: bool = True) -> AutoEncoder:
     ckpt_path = configs[name].ae_path
     if (
-        not os.path.exists(ckpt_path)
+        ckpt_path is None
         and configs[name].repo_id is not None
         and configs[name].repo_ae is not None
         and hf_download

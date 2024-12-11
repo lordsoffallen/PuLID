@@ -26,7 +26,7 @@ class SamplingOptions:
     num_steps: int
     guidance: float
     seed: int | None
-    lora_scale: float | None
+    lora_scale: float = None
 
     # Extras for flux tools
     img_cond_path: str = None
