@@ -292,7 +292,7 @@ class FluxFillGenerator:
         timesteps = get_schedule(
             opts.num_steps, 
             inp["img"].shape[1], 
-            shift=(name != "flux-schnell")
+            shift=(self.model_name != "flux-schnell")
         )
 
         # offload TEs to CPU, load processor models and id encoder to gpu
